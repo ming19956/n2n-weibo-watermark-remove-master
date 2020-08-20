@@ -71,7 +71,7 @@ class ValGenerator(Sequence):
             y = cv2.imread(str(image_path))
             h, w, _ = y.shape
             #y = y[:(h // 16) * 16, :(w // 16) * 16]  # for stride (maximum 16)
-            y = y[h - 34: h, w - 234: w]
+            y = y[h - 60: h, w - 360: w]
             x = val_noise_model(y)
             #a = x - y
             #cv2.imshow("img", a)

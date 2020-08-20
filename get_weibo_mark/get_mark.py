@@ -4,8 +4,9 @@ import numpy as np
 #图像减法 - 血液流动
 ori1 = cv2.imread('IMG_9359.JPG', cv2.IMREAD_UNCHANGED)
 ori1 = cv2.cvtColor(ori1,cv2.COLOR_RGB2GRAY)
-ori2 = cv2.imread('../inputdir/IMG_9360.JPG')
-ori2 = cv2.cvtColor(ori2,cv2.COLOR_RGB2GRAY, cv2.IMREAD_UNCHANGED)
+ori2 = cv2.imread('IMG_9360.JPG', cv2.IMREAD_UNCHANGED)
+ori2 = cv2.cvtColor(ori2,cv2.COLOR_RGB2GRAY)
+
 
 city3 = ori2 - ori1
 # for i in city3:
@@ -15,16 +16,19 @@ city3 = ori2 - ori1
 
 
 city3[128 >= city3] = 0
+
 ori2[140 >= ori2] = 0
 city4 = ori2
 city3 = ori2
 #cv2.imshow('test_new', city4)
 
+
+
 s = np.shape(city3)
 print(s)
-file = open("moin_moin_symbol.txt", "w")
-for i in range(767,s[0]-8):
-    for j in range(633,s[1] - 112):
+file = open("moin_moin_symbol_dong.txt", "w")
+for i in range(766,s[0]-8):
+    for j in range(633,s[1] - 130):
         #if tmp[i][j][0] >= 250 and tmp[i][j][0] < 255:
         if ori2[i][j] == 0:
             file.write(str(ori2[i][j]))
@@ -37,13 +41,17 @@ for i in range(767,s[0]-8):
             file.write(" ")
     file.write("\n")
 
-cv2.cvtColor(city3, cv2.COLOR_BGR2BGRA)
+cv2.cvtColor(city3, cv2.COLOR_GRAY2BGRA)
 
 cv2.imwrite("white_mark.png", city3)
 tmp = cv2.imread("white_mark.png", cv2.IMREAD_UNCHANGED)
-tmp = cv2.cvtColor(tmp, cv2.COLOR_RGB2BGRA)
-tmp[np.all(tmp == [255, 255, 255, 255], axis=2)] = [0, 0, 0, 0]
+tmp = cv2.cvtColor(tmp, cv2.COLOR_GRAY2BGRA)
 
+for each in range(s[0]):
+    for each_each in range(s[1]):
+        if tmp[each][each_each][0] < 150:
+            tmp[each][each_each] = [0, 0, 0, 0]
+#tmp[np.all(tmp[:][:][2] < 250)] = [0, 0, 0, 0]
 s = np.shape(tmp)
 print(s)
 file = open("moin.txt", "w")

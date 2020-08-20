@@ -68,8 +68,8 @@ def main():
             # "q": quit
             if key == 113:
                 return 0
-    #path1 = path + '/compare_diff/compare_diff.py'
-    #os.system("python %s %s %s" % (path1, image_dir, output_dir))
+    #path1 = path + '/compare_diff/compare_diff.py'                     # 测试时注释此两行
+    #os.system("python %s %s %s" % (path1, image_dir, output_dir))      # 寻找最优模型时，取消注释
 
 if __name__ == '__main__':
     main()

@@ -48,7 +48,7 @@ def get_noise_model(noise_type="gaussian,0,50"):
             TRANSPARENCY = random.randint(88, 97)
 
             logo_ran = random.randint(1, num_logo)
-            bigger = random.uniform(1, 1.3)
+            bigger = random.uniform(1, 2)
 
 
 
@@ -57,8 +57,6 @@ def get_noise_model(noise_type="gaussian,0,50"):
             watermark = Image.open('./dataset/mark_logo_ran/mark_rewrite_{}.png'.format(logo_ran))
             hei = watermark.size[1]
             wid = watermark.size[0]
-
-
 
             watermark = watermark.resize((int(wid * bigger), int(hei * bigger)))
 

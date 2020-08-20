@@ -14,7 +14,7 @@ for r, dirs, files in os.walk('../dataset/mark_logo_ran'):
             print("%s not found."%(file))
 
 images = []
-for r, dirs, files in os.walk('../dataset/train_2'):
+for r, dirs, files in os.walk('../dataset/try'):
     # Get all the images
     for file in files:
         img = cv2.imread(os.sep.join([r, file]))
@@ -58,7 +58,7 @@ for i in range(len(images)):
     #image.paste(watermark, (100 , 100 ), mask=paste_mask)
     #image.paste(watermark, (wid_i - wid, hei_i - hei))
 
-    image.save("../dataset/train/{}.png".format(i))
+    image.save("../inputdir/{}.png".format(i+5))
 #for i in range(len(images)):
 #    hei = np.shape(logo[i // 800])[0]
 #    wid = np.shape(logo[i // 800])[1]

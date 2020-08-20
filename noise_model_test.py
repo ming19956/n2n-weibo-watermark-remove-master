@@ -51,16 +51,19 @@ def get_noise_model(noise_type="gaussian,0,50"):
 
             TRANSPARENCY = random.randint(88, 97)
 
-            #logo_ran = random.randint(1, num_logo - 1)
-            logo_ran = 1
+            logo_ran = random.randint(1, num_logo)
+            bigger = random.uniform(1, 2)
+
             image = Image.fromarray(img)
 
-            watermark = Image.open(path + '/dataset/klucky/mark_rewrite_{}.png'.format(logo_ran))
+            watermark = Image.open('./dataset/mark_logo_ran/mark_rewrite_{}.png'.format(logo_ran))
             hei = watermark.size[1]
             wid = watermark.size[0]
-            # print("mark_size")
-            # print(hei)
-            # print(wid)
+
+            watermark = watermark.resize((int(wid * bigger), int(hei * bigger)))
+
+            hei = watermark.size[1]
+            wid = watermark.size[0]
 
             if watermark.mode != 'RGBA':
                 print("in if")
@@ -71,10 +74,7 @@ def get_noise_model(noise_type="gaussian,0,50"):
 
             hei_i = image.size[1]
             wid_i = image.size[0]
-            # print("image_size")
-            # print(hei_i)
-            # print(wid_i)
-            # exit(1)
+
             # random_W = random.randint(0, wid_i - wid)
             # random_H = random.randint(0, hei_i - hei)
 
@@ -87,12 +87,12 @@ def get_noise_model(noise_type="gaussian,0,50"):
             # else:
             #    image = image.resize((375, 500))
             #    image.paste(watermark, (375 - hei, 500 - wid), mask=paste_mask)
+            # print("size")
+            # print(wid_i, hei_i)
 
             image.paste(watermark, (wid_i - wid, hei_i - hei), mask=paste_mask)
             # image.paste(watermark, (100 , 100 ), mask=paste_mask)
-
-            # image.show()
-            # exit(1)
+            # print(np.shape(image))
             # return img  #测试时请注释这一行 启用48行
             return image  # 训练模型时请注释这一行 启用47行
 

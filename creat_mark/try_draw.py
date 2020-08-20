@@ -15,8 +15,8 @@ def GBK2312():
 
 b,g,r,a = 0,255,0,0
 j = 0
-img_2 = np.zeros((25, 170, 3), np.uint8)
-with open("moin_moin_symbol.txt", "r") as d:
+img_2 = np.zeros((30, 180, 3), np.uint8)
+with open("moin_moin_symbol_dong.txt", "r") as d:
     for each in d.readlines():
         each = each.replace("   ", " ")
         i = 0
@@ -29,37 +29,65 @@ with open("moin_moin_symbol.txt", "r") as d:
 
 alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()1234567890'
 names = []
-while len(names) < 1:
-    str = ""
-    for each in range(random.randint(5, 18)):
-        if each % 2 == 0:
-            str += random.choice(alphabet)
-        else :
-            str += GBK2312()
-    if str not in names:
-        names.append(str)
-
 
 #names = ["_Lucky_M", "mamnunticha", "GO_Hank", "aoi_bhinn", "BadTaste"]
-#names = ["_Lucky_M"]
+#names = ["@脸脸颐真的微博"]
 ## Use simsum.ttc to write Chinese.
 j = 1
 #names = [""]
-for i in names:
-
+while len(names) < 99:
+    str = "@"
+    ran_ch_en = random.randint(1,3)
+    #ran_ch_en = 2
+    for each in range(random.randint(4, 15)):
+        if ran_ch_en == 1:
+            str += random.choice(alphabet)
+        elif ran_ch_en == 2:
+            str += GBK2312()
+        elif ran_ch_en == 3:
+            str += random.choice(alphabet)
+            str += GBK2312()
+    if str not in names:
+        names.append(str)
+    else:
+        continue
 
     j += 1
-    fontpath = "./方正兰亭黑简.TTF" # <== 这里是宋体路径
-    font = ImageFont.truetype(fontpath, 19)
+    fontpath = "./38.ttf"  # <== 这里是宋体路径
+    #str = "@脸脸颐真的微博"
     img_pil = Image.fromarray(img_2)
     draw = ImageDraw.Draw(img_pil)
-    draw.text((54, 0), i, font = font, fill = (255,255,255))
+    if ran_ch_en == 2 or ran_ch_en == 3:
+        font = ImageFont.truetype(fontpath, 22)
+        draw.text((34, 0), str, font=font, fill=(255, 255, 255))
+    else:
+        font = ImageFont.truetype(fontpath, 23)
+        draw.text((34, -4), str, font=font, fill=(255, 255, 255))
 
     img = np.array(img_pil)
 
 
-    s = (20, 100, 3)
+    #s = (20, 100, 3)
     tmp = img
+    s = np.shape(tmp)
+
+    for each in range(1, s[0] - 1):
+        for each_each in range(1, s[1] - 1):
+            if tmp[each][each_each][0] < 60:
+                #if tmp[each + 1][each_each] != 0 and tmp[each - 1][each_each] != 0:
+                tmp[each][each_each] = [0, 0, 0]
+            elif tmp[each][each_each][0] < 100 and tmp[each][each_each][0] != 0:
+                res = random.randint(130, 150)
+                tmp[each][each_each] = [res, res, res]
+            elif tmp[each][each_each][0] < 150 and tmp[each][each_each][0] != 0:
+                res = random.randint(170, 200)
+                tmp[each][each_each] = [res, res, res]
+            elif tmp[each][each_each][0] < 200 and tmp[each][each_each][0] != 0:
+                res = random.randint(200, 255)
+                tmp[each][each_each] = [res, res, res]
+            while tmp[each][each_each][0] < tmp[each + 1][each_each][0] and tmp[each][each_each][0] < tmp[each - 1][each_each][0] and tmp[each][each_each][0] != 0:
+                tmp[each][each_each] = tmp[each][each_each] + [1, 1, 1]
+
 
     # file = open("moin_new.txt", "w")
     # for i in range(s[0]):
@@ -83,6 +111,6 @@ for i in names:
     tmp = cv2.imread("tmp.png", cv2.IMREAD_UNCHANGED)
     tmp = cv2.cvtColor(tmp, cv2.COLOR_RGB2BGRA)
     tmp[np.all(tmp == [0, 0, 0, 255], axis=2)] = [0, 0, 0, 0]
-    cv2.imwrite("./tmp.png", tmp)
+    cv2.imwrite("../dataset/mark_logo_ran/mark_rewrite_{}.png".format(j), tmp)
     #cv2.imwrite("../dataset/mark_logo_ran/mark_rewrite_{}.png".format(j), tmp)
     #cv2.imwrite("res.png", img)
