@@ -18,7 +18,7 @@ def get_args():
                         help="model architecture ('srresnet' or 'unet')")
     parser.add_argument("--weight_file", type=str, required=True,
                         help="trained weight file")
-    parser.add_argument("--test_noise_model", type=str, default="text,0,25",
+    parser.add_argument("--test_noise_model", type=str, default= "clean",
                         help="noise model for test images")
     parser.add_argument("--output_dir", type=str, default=None,
                         help="if set, save resulting images otherwise show result using imshow")
@@ -55,6 +55,7 @@ def main():
 
         out_image = np.zeros((h, w * 1, 3), dtype=np.uint8)
         noise_image = val_noise_model(image)
+
         pred = model.predict(np.expand_dims(noise_image, 0))
         denoised_image = get_image(pred[0])
         out_image[:, :w] = denoised_image

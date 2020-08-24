@@ -111,6 +111,6 @@ while len(names) < 99:
     tmp = cv2.imread("tmp.png", cv2.IMREAD_UNCHANGED)
     tmp = cv2.cvtColor(tmp, cv2.COLOR_RGB2BGRA)
     tmp[np.all(tmp == [0, 0, 0, 255], axis=2)] = [0, 0, 0, 0]
-    cv2.imwrite("../dataset/mark_logo_ran/mark_rewrite_{}.png".format(j), tmp)
+    cv2.imwrite("../dataset/mark_logo_ran_new/mark_rewrite_{}.png".format(j), tmp)
     #cv2.imwrite("../dataset/mark_logo_ran/mark_rewrite_{}.png".format(j), tmp)
     #cv2.imwrite("res.png", img)

@@ -8,6 +8,6 @@ for r, dirs, files in os.walk('../text_noise/cur'):
 
 for each in model:
     path = "../text_noise/cur/" + each
-    inputdir = "inputdir"
-    outputdir = "outputdir_cont"
+    inputdir = "input_best_model"
+    outputdir = "outputdir"
     os.system("python ../test_model.py --weight_file %s --image_dir %s --output_dir %s" % (path, inputdir, outputdir))

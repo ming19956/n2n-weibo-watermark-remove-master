@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 #图像减法 - 血液流动
-ori1 = cv2.imread('IMG_9359.JPG', cv2.IMREAD_UNCHANGED)
+ori1 = cv2.imread('../dataset/try/IMG_9359.JPG', cv2.IMREAD_UNCHANGED)
 ori1 = cv2.cvtColor(ori1,cv2.COLOR_RGB2GRAY)
 ori2 = cv2.imread('IMG_9360.JPG', cv2.IMREAD_UNCHANGED)
 ori2 = cv2.cvtColor(ori2,cv2.COLOR_RGB2GRAY)
@@ -26,8 +26,8 @@ city3 = ori2
 
 s = np.shape(city3)
 print(s)
-file = open("moin_moin_symbol_dong.txt", "w")
-for i in range(766,s[0]-8):
+file = open("moin_moin_symbol_dong——test.txt", "w")
+for i in range(760,s[0] - 8):
     for j in range(633,s[1] - 130):
         #if tmp[i][j][0] >= 250 and tmp[i][j][0] < 255:
         if ori2[i][j] == 0:

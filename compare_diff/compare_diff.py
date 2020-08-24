@@ -127,7 +127,7 @@ def get_diff(path1, path2):
     file.write("\n")
 
 if __name__ == '__main__':
-    get_diff("../inputdir", "../outputdir_cont")
+    get_diff("../input_best_model", "../outputdir")
     #img1 = np.array(imageio.imread('../inputdir/0.png', pilmode='RGB').astype('float32'))
     #img2 = np.array(imageio.imread('../outputdir/0.png', pilmode='RGB').astype('float32'))
     #img1 = cv2.imread('../inputdir/0.png')

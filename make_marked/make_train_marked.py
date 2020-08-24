@@ -4,7 +4,7 @@ import os
 import random
 from PIL import Image
 logo = []
-for r, dirs, files in os.walk('../dataset/mark_logo_ran'):
+for r, dirs, files in os.walk('../dataset/mark_logo_ran_new'):
     # Get all the images
     for file in files:
         img = cv2.imread(os.sep.join([r, file]), cv2.IMREAD_UNCHANGED)
@@ -58,7 +58,7 @@ for i in range(len(images)):
     #image.paste(watermark, (100 , 100 ), mask=paste_mask)
     #image.paste(watermark, (wid_i - wid, hei_i - hei))
 
-    image.save("../inputdir/{}.png".format(i+5))
+    image.save("../inputdir/{}.png".format(i+20))
 #for i in range(len(images)):
 #    hei = np.shape(logo[i // 800])[0]
 #    wid = np.shape(logo[i // 800])[1]
