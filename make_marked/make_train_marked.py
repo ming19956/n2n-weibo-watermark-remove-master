@@ -37,6 +37,9 @@ for i in range(len(images)):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     image = Image.fromarray(img)
     watermark = Image.fromarray(logo[cur])
+    s = np.shape(watermark)
+    flag = random.uniform(1.45, 2)
+    watermark = watermark.resize((int(s[1] / flag), int(s[0] / flag)), Image.ANTIALIAS)
     hei = watermark.size[1]
     wid = watermark.size[0]
     # print("mark_size")

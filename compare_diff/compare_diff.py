@@ -2,6 +2,7 @@ import tensorflow as tf
 import numpy as np
 import cv2
 import os
+import argparse
 path = os.path.abspath("..")
 
 def _tf_fspecial_gauss(size, sigma=1.5):
@@ -77,7 +78,10 @@ def get_diff(path1, path2):
     for i in range(len(image1)):
         img1 = cv2.imread("{}/{}".format(path1,image1[i]))
         img2 = cv2.imread("{}/{}".format(path2,image2[i]))
-
+        s = np.shape(img1)
+        if s[0] * s[1] > 172800 * 8:
+            flag = np.sqrt(s[0] * s[1] / 172800 / 8)
+            img1 = cv2.resize(img1, (int(s[1] / flag), int(s[0] / flag)))
 
         h1 = np.shape(img1)[0]
         w1 = np.shape(img1)[1]
@@ -126,8 +130,21 @@ def get_diff(path1, path2):
     file.write("average : {}  |  {}".format(average1 / len(image1), average2 / len(image1)))
     file.write("\n")
 
+def get_args():
+    parser = argparse.ArgumentParser(description="test",
+                                     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument("--init_path", type=str, default="./",
+                        help="init image with out watermark")
+    parser.add_argument("--output_path", type=str, default="./",
+                        help="output image after cleanning")
+    args = parser.parse_args()
+    return args
+
 if __name__ == '__main__':
-    get_diff("../input_best_model", "../outputdir")
+    arg = get_args()
+    init = arg.init_path
+    output = arg.output_path
+    get_diff(init, output)
     #img1 = np.array(imageio.imread('../inputdir/0.png', pilmode='RGB').astype('float32'))
     #img2 = np.array(imageio.imread('../outputdir/0.png', pilmode='RGB').astype('float32'))
     #img1 = cv2.imread('../inputdir/0.png')

@@ -9,7 +9,7 @@ import os
 #logo = ["mark_rewrite__Lucky_M.png", "mark_rewrite_aoi_bhinn.png", "mark_rewrite_BadTaste.png", "mark_rewrite_GO_Hank.png", "mark_rewrite_mamnunticha.png"]
 #logo = ["mark_rewrite__Lucky_M.png"]
 num_logo = 0
-for r, dirs, files in os.walk('./dataset/mark_logo_ran'):
+for r, dirs, files in os.walk('./dataset/mark_logo_ran_new'):
     # Get all the images
     for file in files:
         num_logo += 1
@@ -48,17 +48,17 @@ def get_noise_model(noise_type="gaussian,0,50"):
             TRANSPARENCY = random.randint(88, 97)
 
             logo_ran = random.randint(1, num_logo)
-            bigger = random.uniform(1, 2)
+            bigger = random.uniform(1.31, 2)
 
 
 
             image = Image.fromarray(img)
 
-            watermark = Image.open('./dataset/mark_logo_ran/mark_rewrite_{}.png'.format(logo_ran))
+            watermark = Image.open('./dataset/mark_logo_ran_new/mark_rewrite_{}.png'.format(logo_ran))
             hei = watermark.size[1]
             wid = watermark.size[0]
 
-            watermark = watermark.resize((int(wid * bigger), int(hei * bigger)))
+            watermark = watermark.resize((int(wid / bigger), int(hei / bigger)))
 
             hei = watermark.size[1]
             wid = watermark.size[0]
